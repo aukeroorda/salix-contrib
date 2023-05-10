@@ -40,6 +40,11 @@
         <artifactId>salix-core</artifactId>
         <version>0.1.0-RC1</version>
     </dependency>
+    <dependency>
+        <groupId>org.rascalmpl</groupId>
+        <artifactId>corel-language</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </dependency>
 </dependencies>
 
 <build>

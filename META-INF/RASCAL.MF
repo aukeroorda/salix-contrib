@@ -1,6 +1,5 @@
 Manifest-Version: 0.0.1
 Project-Name: salix-contrib
 Source: src/main/rascal
-Require-Libraries: |lib://salix-core|
+Require-Libraries: |lib://salix-core|, |lib://rascal-lsp|, |lib://corel-language|
 
-    

@@ -36,7 +36,11 @@ Model update(Msg msg, Model m) {
       do(aceSetText("myAce", textUpdated(), m.code));
     }
     case editorChange(map[str,value] delta):
-      println("editor change");
+      {
+        // m.code += "\nayyyy";
+        println("editor change, but not applying change to local model representation!!!!!");
+        // do(aceSetText("myAce", textUpdated(), m.code));
+      }
     case showHide(): m.visible = !m.visible;
   }
   return m;
