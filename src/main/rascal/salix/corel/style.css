@@ -1,0 +1,138 @@
+html {
+	font-size: 1.3rem;
+}
+
+
+body {
+	margin: 0px auto;
+	max-width: 800px;
+	background-color: #fafefa;
+	padding-top: 10vh;
+	padding-bottom: 20vh;
+	padding-left: 5vh;
+	padding-right: 5vh;
+	box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.unit {
+	color: #B53;
+}
+
+sup {
+	vertical-align: top;
+	position: relative;
+	top: -0.2rem;
+}
+
+sub {
+	vertical-align: bottom;
+	position: relative;
+	bottom: -0.2rem;
+}
+
+/* Thanks to https://bitsofco.de/making-abbr-work-for-touchscreen-keyboard-mouse/
+*/
+abbr[title]:hover::after,
+abbr[title]:focus::after {
+  content: attr(title);
+
+  /* position tooltip like the native one */
+  position: absolute;
+  right: 0px;
+  white-space: pre-wrap;
+
+  /* style tooltip */
+  background-color: #1e1e1e;
+  color: #fff;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.4);
+  padding: 3px 5px;
+  z-index: 1;
+}
+
+.ingredient_def {
+	color: #593;
+}
+
+.ingredient_highlight {
+	border-bottom: solid black 3px;
+	outline-offset: -1px;
+}
+
+.preparation {
+	font-style: italic;
+	transform: skew(8deg, 0);
+	display: inline-block;
+}
+
+.instruction:focus {
+	border-bottom: solid black 3px;
+	outline-offset: -1px;
+}
+
+.ingredient_ref {
+	color: #593;
+}
+
+.timer {
+	color: #359;
+}
+
+.timer_highlight {
+	border: 3px solid black;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.temperature {
+	color: #953;
+}
+
+ol li {
+	position: relative;
+	line-height: 1.2;
+}
+
+ol li::marker {
+	color: #bba;
+}
+
+table {
+	width: 100%;
+	text-align: right;
+	font-size: inherit;
+}
+
+table.nutrition_table th:nth-child(1),
+table.nutrition_table td:nth-child(1) {
+	text-align: left;
+}
+
+th, td {
+  padding: 6px 4px;
+  border-bottom: thin solid #ddd;
+}
+
+th {
+  background-color: #fafefa;
+  position: sticky;
+  top: 0;
+}
+
+tr:nth-child(even) {
+	background-color: #fbfffb;
+}
+
+tr:last-child {
+	background-color: #fffbfb;
+}
+
+tr:hover {
+	background-color: #eff;
+}
