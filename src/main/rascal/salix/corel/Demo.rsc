@@ -11,6 +11,7 @@ import corel::CorelLanguageServer;
 
 import salix::corel::Model;
 import salix::corel::RecipeView;
+import salix::corel::LspWebEditor; // For lspTest command? Maybe the command should be moved to a different module
 
 import ParseTree;
 
@@ -51,7 +52,6 @@ SalixApp[Model] recipeApp(str id = "recipeDemo")
         update
     );
 
-
 App[Model] recipeWebApp()
     = webApp(
         recipeApp(),
@@ -73,6 +73,16 @@ Model update(Msg msg, Model m) {
             m.last_valid_ast.ingredients.ingredients += [cst2ast(parse(#Ingredient, ingredient))];
         case removeIngredients():
             m.last_valid_ast.ingredients.ingredients = [];
+        case testMessage():
+        {
+            println("parsing testMessage");
+            Cmd ab = lspTest("recipeDemo", receiveMessage("originated from testMessage"), m.code);
+            println("part 1 done");
+            do(ab);
+            println("did command");
+        }
+        case receiveMessage(str message):
+            println("receiveMessage: <message>");
         case editorChange(map[str,value] delta):
             {
                 println("delta is:");
@@ -131,9 +141,19 @@ Model update(Msg msg, Model m) {
                 // println("ok");
                 // println("<lines>");
                 // println(intercalate("\n", lines));
-                println("parsing the lines");
+                println("parsing the liness");
                 // list[str] lines = fromJSON(#list[str], delta["payload"]);
+                // list[str] unescaped_lines = [];
+                // for (str line <- delta["payload"]) {
+                    // println("from <line> to <deescape(line)>");
+                    // unescaped_lines += [deescape(line)];
+                // }
+                // m.src = intercalate("\n", unescaped_lines);
                 m.src = intercalate("\n", delta["payload"]);
+                println("deescaping src");
+                m.src = deescape(m.src);
+                rprint(m.src);
+                println("deescaped src");
                 println("parsed lines");
                 // println(lines);
                 // do(aceSetText("myAce", textUpdated(), m.code));

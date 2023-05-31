@@ -2,6 +2,8 @@
  */
 module salix::corel::LspWebEditor
 
+import salix::corel::Model; // This should retrieve the Msg data type, but it doesn't seem to work
+
 /* Eventually use same definitions as used in the LanguageServer module,
  * however, it seems quite involved to pass the name of the main module and
  * function as strings, and then use util::Reflective to convert them back, so
@@ -12,6 +14,7 @@ import util::LanguageServer;
 import salix::HTML;
 import salix::Node;
 import salix::Core;
+
 
 import salix::util::Mode;
 
@@ -40,12 +43,17 @@ str initCode(str name, str theme, str mode)
     '<name>$editor.setTheme(\'<theme>\');
     '<name>$editor.session.setMode(\'<mode>\');
     '<name>$aceInit(<name>$editor);
-    '$salix.registerAlien(\'<name>\', p =\> <name>$acePatch(<name>$editor, p), {aceSetText_<name>: args =\> {
+    '$salix.registerAlien(\'<name>\', p =\> <name>$acePatch(<name>$editor, p), {
+    'aceSetText_<name>: args =\> {
     '   <name>$fromAceSetValue = true;
     '   <name>$editor.setValue(args.code); 
     '   <name>$fromAceSetValue = false;
     '   return {type: \'nothing\'};
-    }});";
+    '},
+    'lspTest_<name>: args =\> {
+    ' console.log(args);
+    '}}
+    );";
 
 
 
@@ -53,6 +61,14 @@ str initCode(str name, str theme, str mode)
 Cmd aceSetText(str name, Msg msg, str code)
   = command("aceSetText_<name>", encode(msg), args = ("code": code));
 
+// Import salix::corel::LspWebEditor, en probeer:
+// lspTest("testname", testMessage(), "strtestcode");
+// Dit faalt omdat testMessage niet defined is, alhouwel die dat wel zou moeten zijn vanwege de
+// import salix::corel::Model; in het begin van deze module.
+// Na de salix::corel::Model module handmatig te importeren in de terminal, is testMessage 
+// wel defined en lukt de call naar lspTest(..) wel
+Cmd lspTest(str name, Msg msg, str code)
+  = command("lspTest_<name>", encode(msg), args = ("code": code));
 
 Attr onAceChange(Msg(map[str,value]) f)
   = event("aceChange", jsonPayload(f));
