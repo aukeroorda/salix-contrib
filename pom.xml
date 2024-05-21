@@ -71,6 +71,7 @@
             </configuration>
             <executions>
                 <execution>
+                    <!-- This execution block causes an error -->
                     <id>compile</id>
                     <phase>compile</phase>
                     <goals>
